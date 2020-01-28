@@ -45,6 +45,12 @@ void set_speedB(signed char speed){
 }
 
 void setup() {
+  pinMode(in1, OUTPUT); // Motor Channel A
+  pinMode(in2, OUTPUT);
+  pinMode(in3, OUTPUT); // Motor Channel B
+  pinMode(in4, OUTPUT);
+  pinMode(enA, OUTPUT);
+  pinMode(enB, OUTPUT);
   myservo.attach(12);
   // put your setup code here, to run once:
   Serial.begin(9600);
