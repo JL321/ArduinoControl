@@ -4,7 +4,11 @@
 #define in4 7
 #define enA 9
 #define enB 10
+#include <Servo.h>
 
+Servo myservo;
+
+int pos = 0;
 char val = 0;
 
 signed char i = 0;
@@ -41,6 +45,7 @@ void set_speedB(signed char speed){
 }
 
 void setup() {
+  myservo.attach(12);
   // put your setup code here, to run once:
   Serial.begin(9600);
   Serial.println("Hello I am alive");
@@ -66,11 +71,12 @@ void loop() {
       digitalWrite(in2, LOW);
       digitalWrite(in3, HIGH);
       digitalWrite(in4, LOW);
-      i = i-8;
-      j = j-8;
+      i = i+8;
+      j = j+8;
       set_speedA(i);
       set_speedB(j);
-    } else if (val == 'd'){
+      delay(1000);
+    } else if (val == 'a'){
       digitalWrite(in1, HIGH);
       digitalWrite(in2, HIGH);
       digitalWrite(in3, HIGH);
@@ -79,7 +85,7 @@ void loop() {
       j = j-8;
       set_speedA(i);
       set_speedB(j);
-    } else if (val == 'a'){
+    } else if (val == 'd'){
       digitalWrite(in1, HIGH);
       digitalWrite(in2, LOW);
       digitalWrite(in3, HIGH);
@@ -91,10 +97,22 @@ void loop() {
     } else if (val == 'k'){
       i = 0;
       j = 0;
+      digitalWrite(in1, LOW);
+      digitalWrite(in2, LOW);
+      digitalWrite(in3, LOW);
+      digitalWrite(in4, LOW);
       set_speedA(i);
       set_speedB(j);
     } else if (val == 'l'){
       turn(0);
+    } else if (val == 't'){
+      pos += 90;
+      myservo.write(pos);
+      delay(15);
+    } else if (val == 'r'){
+      pos -= 90;
+      myservo.write(0);
+      delay(15);
     }
   }
 }
